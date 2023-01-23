@@ -1,18 +1,31 @@
-async function getData() {
-  let word = "strong"
-  const url = `https://dictionary-by-api-ninjas.p.rapidapi.com/v1/dictionary?word=${word}`
+const inp = document.querySelector("#inp")
+const wordEl = document.querySelector(".word")
+const meaningEl = document.querySelector(".meaning")
+const aboutEl = document.querySelector(".about")
+const button = document.querySelector(".btn")
 
-  const options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "a0fc9638a5msh20831abe21a6647p133736jsn380ceab117ee",
-      "X-RapidAPI-Host": "dictionary-by-api-ninjas.p.rapidapi.com",
-    },
-  }
+let word
 
-  const response = await fetch(url, options)
+async function getData(word) {
+  const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+
+  const response = await fetch(url)
   const data = await response.json()
   console.log(data)
+  showData(data)
 }
 
-getData()
+button.addEventListener("click", getMeaning)
+
+function getMeaning() {
+  //   word = inp.value
+  word = "strong"
+  getData(word)
+}
+
+function showData(data) {
+  wordEl.innerText = data.word
+  meaningEl.innerText = data[0].meanings[0].definitions[0].definition
+}
+
+window.addEventListener("load", getMeaning)
