@@ -21,6 +21,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 80vh;
+  width: 70%;
 }
 
 #inp {
@@ -32,6 +33,7 @@ body {
   border-right: none;
   transition: 0.1s;
   margin: 0px 4px;
+  width: 80%;
 }
 
 #inp:focus {
@@ -52,7 +54,7 @@ body {
 
 .about {
   margin: 5px 0px;
-  color: rgb(183, 183, 183);
+  color: rgb(115, 115, 115);
 }
 
 .meaning {
@@ -98,10 +100,15 @@ p {
   align-items: center;
   justify-content: space-between;
   margin: 10px 0px;
+  width: 100%;
 }
 
 i {
   color: black;
   cursor: pointer;
   font-size: 20px;
+}
+
+.input-container {
+  width: 100%;
 }

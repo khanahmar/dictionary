@@ -8,17 +8,18 @@ const synonymEl = document.querySelector(".synonym")
 const iconEl = document.querySelector(".fa-solid")
 const button = document.querySelector(".btn")
 
+console.log(meaningEl)
+let link
 let word
-let audio
+let newAudio
+let data
 async function getData(word) {
   try {
     const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
-
     const response = await fetch(url)
     const data = await response.json()
+    newAudio = data
     console.log(data)
-    audio = `https://ssl.gstatic.com/dictionary/static/sounds/20200429/hello--_gb_1.mp3`
-    console.log(audio)
     showData(data)
   } catch (error) {
     mainEl.innerHTML = "No such result found!"
@@ -44,9 +45,11 @@ function showData(data) {
     data[0].meanings[0].partOfSpeech + ", " + data[0].meanings[1].partOfSpeech
   antonymEl.innerText =
     data[0].meanings[0].antonyms[0] + " , " + data[0].meanings[0].antonyms[1]
+  meaningEl.innerText = `${data[0].meanings[0].definitions[0].definition} , ${data[0].meanings[1].definitions[0].definition}`
 }
 
 iconEl.addEventListener("click", (e) => {
-  //   getData()
+  link = newAudio[0].phonetics[1].audio
+  audio = new Audio(link)
   audio.play()
 })
